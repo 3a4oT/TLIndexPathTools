@@ -63,3 +63,25 @@ jobs:
 
       - name: spm's xcodebuild - ${{ matrix.destination }}
         run: xcodebuild clean build -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" -configuration Release
+  SPMGenerator:
+    name: Verify SPMGenerator script
+    runs-on: macOS-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Regenerate SPM layout and verify that script works as expected
+        run: ./scripts/generate_spm_layout.sh
+
+      - name: Verify after generation SPM is able to build
+        run: xcodebuild clean build -scheme "TLIndexPathTools" -destination "platform=macOS,variant=Mac Catalyst" -configuration Release
+  XCFramework:
+    name: Verify XCFramework
+    runs-on: macOS-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+    steps:
+      - name: Create XCFramework
+        uses: fermoya/swift-create-xcframework@v1.5.0
