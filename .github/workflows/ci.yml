@@ -67,7 +67,7 @@ jobs:
     name: Verify SPMGenerator script
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -83,5 +83,8 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Build XCFramework
         run: xcodebuild -workspace "TLIndexPathTools.xcworkspace" -scheme "XCFramework"
