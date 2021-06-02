@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		0A787A2D266814F200821011 /* XCFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0A787A30266814F200821011 /* Build configuration list for PBXAggregateTarget "XCFramework" */;
+			buildPhases = (
+				0A787A31266814FA00821011 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = XCFramework;
+			productName = XCFramework;
+		};
 		86B0084917CD145800B86B04 /* Docset */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 86B0084C17CD145800B86B04 /* Build configuration list for PBXAggregateTarget "Docset" */;
@@ -389,6 +400,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Tractable Labs";
 				TargetAttributes = {
+					0A787A2D266814F200821011 = {
+						CreatedOnToolsVersion = 12.5;
+						ProvisioningStyle = Automatic;
+					};
 					86029DF21AEEAC2E00ED36D7 = {
 						CreatedOnToolsVersion = 6.3.1;
 						ProvisioningStyle = Manual;
@@ -422,6 +437,7 @@
 				86BFEA4717CD9EC000262FE8 /* HTML Documentation */,
 				86029DF21AEEAC2E00ED36D7 /* TLIndexPathTools */,
 				FBE5624B1FA7275C002B4751 /* TLIndexPathToolsTests */,
+				0A787A2D266814F200821011 /* XCFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -444,6 +460,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A787A31266814FA00821011 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./script/generate_xcframeworks.sh\n";
+		};
 		86B0084D17CD148D00B86B04 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -517,6 +550,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0A787A2E266814F200821011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0A787A2F266814F200821011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		86029E071AEEAC2E00ED36D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -798,6 +847,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A787A30266814F200821011 /* Build configuration list for PBXAggregateTarget "XCFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A787A2E266814F200821011 /* Debug */,
+				0A787A2F266814F200821011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		86029E061AEEAC2E00ED36D7 /* Build configuration list for PBXNativeTarget "TLIndexPathTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

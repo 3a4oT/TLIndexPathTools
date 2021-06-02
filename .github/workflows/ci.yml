@@ -13,7 +13,7 @@ jobs:
     name: Build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
     name: Verify Cocoapods lint
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
       - name: Cocoapods lint
@@ -33,7 +33,7 @@ jobs:
     name: Verify Carthage build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
       - name: carthage
@@ -42,7 +42,7 @@ jobs:
     name: Verify SPM build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     strategy:
       matrix:
         destination:
@@ -63,3 +63,28 @@ jobs:
 
       - name: spm's xcodebuild - ${{ matrix.destination }}
         run: xcodebuild clean build -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" -configuration Release
+  SPMGenerator:
+    name: Verify SPMGenerator script
+    runs-on: macOS-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Regenerate SPM layout and verify that script works as expected
+        run: ./scripts/generate_spm_layout.sh
+
+      - name: Verify after generation SPM is able to build
+        run: xcodebuild clean build -scheme "TLIndexPathTools" -destination "platform=macOS,variant=Mac Catalyst" -configuration Release
+  XCFramework:
+    name: Verify XCFramework
+    runs-on: macOS-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build XCFramework
+        run: xcodebuild -workspace "TLIndexPathTools.xcworkspace" -scheme "XCFramework"

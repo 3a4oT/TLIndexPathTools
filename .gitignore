@@ -57,3 +57,6 @@ fastlane/test_output
 
 .swiftpm
 .build
+
+archives
+*.xcframework
