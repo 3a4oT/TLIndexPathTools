@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Create XCFramework
-        uses: unsignedapps/swift-create-xcframework@v1.4
+        uses: unsignedapps/swift-create-xcframework@v1.4.0
 
       - name: Create Release
         id: create_release

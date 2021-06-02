@@ -84,4 +84,4 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - name: Create XCFramework
-        uses: unsignedapps/swift-create-xcframework@v1.4
+        uses: unsignedapps/swift-create-xcframework@v1.4.0
