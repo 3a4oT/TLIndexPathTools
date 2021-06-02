@@ -13,7 +13,7 @@ jobs:
     name: Build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
     name: Verify Cocoapods lint
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
       - name: Cocoapods lint
@@ -33,7 +33,7 @@ jobs:
     name: Verify Carthage build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - uses: actions/checkout@v2
       - name: carthage
@@ -42,7 +42,7 @@ jobs:
     name: Verify SPM build
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     strategy:
       matrix:
         destination:
@@ -81,7 +81,7 @@ jobs:
     name: Verify XCFramework
     runs-on: macOS-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
       - name: Create XCFramework
-        uses: fermoya/swift-create-xcframework@v1.5.0
+        uses: unsignedapps/swift-create-xcframework@v1.4
