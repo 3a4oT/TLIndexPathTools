@@ -17,8 +17,16 @@ jobs:
         uses: actions/checkout@v2
 
     steps:
-      - name: Create XCFramework
-        uses: unsignedapps/swift-create-xcframework@v1.4.0
+
+      - name: Build XCFramework
+        run: xcodebuild -workspace "${{env.FRAMEWORK_NAME}}.xcworkspace" -scheme "XCFramework"
+
+      - name: Archive xcframework
+        run: zip -r "${{env.FRAMEWORK_NAME}}.xcframework.zip" "${{env.FRAMEWORK_NAME}}.xcframework"
+
+       # We will use this signature later as the env.SPM_SIGNATURE
+      - name: Set SPM SIGNATURE
+        run: echo "SPM_SIGNATURE=$(swift package compute-checksum ${{env.FRAMEWORK_NAME}}.xcframework.zip)" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -30,14 +38,18 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+          body: |
+            Swift Package Manager Signature:
+            ${{env.SPM_SIGNATURE}}
 
       - name: Upload Release Asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./${{ env.FRAMEWORK_NAME }}.xcframework.zip
-          asset_name: ${{ env.FRAMEWORK_NAME }}.xcframework.zip
+          asset_path: ./${{env.FRAMEWORK_NAME}}.xcframework.zip
+          asset_name: ${{env.FRAMEWORK_NAME}}.xcframework.zip
           asset_content_type: application/zip
+

@@ -83,5 +83,5 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
     steps:
-      - name: Create XCFramework
-        uses: unsignedapps/swift-create-xcframework@v1.4.0
+      - name: Build XCFramework
+        run: xcodebuild -workspace "TLIndexPathTools.xcworkspace" -scheme "XCFramework"
